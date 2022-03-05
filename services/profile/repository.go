@@ -6,7 +6,6 @@ import (
 	"time"
 
 	"github.com/baturalpk/photo-bucket/ent"
-	"github.com/baturalpk/photo-bucket/ent/photosmetadata"
 	"github.com/baturalpk/photo-bucket/ent/profile"
 	"github.com/baturalpk/photo-bucket/pkg/crypto"
 	"github.com/baturalpk/photo-bucket/services/profile/contracts"
@@ -83,27 +82,12 @@ func (r repository) SignIn(ctx context.Context, form interface{}) (*ent.Profile,
 	return nil, token, err
 }
 
-func (r repository) GetByUsername(ctx context.Context, username string) (p *ent.Profile, err error) {
-	p, err = r.main.Profile.Query().Where(profile.Username(username)).Select(
+func (r repository) GetByUsername(ctx context.Context, username string) (*ent.Profile, error) {
+	return r.main.Profile.Query().Where(profile.Username(username)).Select(
 		profile.FieldID,
 		profile.FieldUsername,
 		profile.FieldPictureURL,
 		profile.FieldName,
 		profile.FieldBiography,
-	).
-		WithPhotos(func(q *ent.PhotosMetadataQuery) {
-			q.Select(
-				photosmetadata.FieldID,
-				photosmetadata.FieldWidth,
-				photosmetadata.FieldHeight,
-				photosmetadata.FieldImageFormat,
-				photosmetadata.FieldRelativeURL,
-				photosmetadata.FieldUploadedAt,
-			)
-			q.Order(ent.Desc(photosmetadata.FieldUploadedAt))
-			q.Offset(0)
-			q.Limit(8)
-		}).
-		Only(ctx)
-	return
+	).Only(ctx)
 }
