@@ -6,6 +6,7 @@ import (
 
 	"github.com/baturalpk/photo-bucket/clients/s3client"
 	"github.com/baturalpk/photo-bucket/ent"
+	"github.com/baturalpk/photo-bucket/ent/photosmetadata"
 	"github.com/baturalpk/photo-bucket/services/photo/contracts"
 	"github.com/google/uuid"
 )
@@ -22,15 +23,31 @@ func NewRepository(metadataDB *ent.Client, mainStorage s3client.S3) *repository 
 	}
 }
 
-func (r repository) Create(ctx context.Context, newp contracts.NewPhoto) error {
+func (r repository) Create(ctx context.Context, newp contracts.NewPhoto) (uuid.UUID, error) {
 	pid := uuid.New()
-	if err := r.s3.UploadPhoto(
-		fmt.Sprintf("/%s/%s.%s", newp.OwnerID, pid.String(), newp.Format),
-		newp.Data,
-	); err != nil {
-		return err
+	url := fmt.Sprintf("/%s/%s.%s", newp.OwnerID, pid.String(), newp.Format)
+
+	if err := r.s3.UploadPhoto(url, newp.Data); err != nil {
+		return pid, err
 	}
 
-	// TODO: ent. /create hook for uploading metadata
-	return nil
+	metad := r.meta.PhotosMetadata.Create()
+	metad.
+		SetID(pid).
+		SetOwnerID(newp.OwnerID).
+		SetTags(newp.Tags).
+		SetDescription(newp.Description).
+		SetWidth(newp.Data.Bounds().Dx()).
+		SetHeight(newp.Data.Bounds().Dy()).
+		SetImageFormat(photosmetadata.ImageFormat(newp.Format)).
+		SetRelativeURL(url)
+
+	if _, err := metad.Save(ctx); err != nil {
+		return pid, err
+	}
+	return pid, nil
+}
+
+func (r repository) GetByID(ctx context.Context, id uuid.UUID) (*ent.PhotosMetadata, error) {
+	return r.meta.PhotosMetadata.Get(ctx, id)
 }
