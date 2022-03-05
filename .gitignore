@@ -1,0 +1,34 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+build/
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+
+# Dependency directories (remove the comment below to include it)
+vendor/
+
+# IDE generated directories
+.vscode/
+.idea/
+
+# Ignore secrets config files except the template.
+*secrets*
+!config/secrets.template.yaml
+
+# Ignore dotenv config files except the template.
+.env*
+!.env.template
+
+# Certificate file
+*.pem
+
+# Output of test data
+*_result_*
