@@ -71,3 +71,20 @@ func TestRepository_GetByID(t *testing.T) {
 		t.Log(metad)
 	}
 }
+
+func TestRepository_GetByOwner(t *testing.T) {
+	beforeTest(t)
+	profileRepo := profile.NewRepository(entclient.Client())
+	owner, err := profileRepo.GetByUsername(context.Background(), data.TestUsers()[0].Username)
+	if err != nil {
+		t.Error(err)
+		t.FailNow()
+	}
+	repo := NewRepository(entclient.Client(), s3client.S3{})
+	if photos, err := repo.GetByOwner(context.Background(), owner.ID); err != nil {
+		t.Error(err)
+		t.Fail()
+	} else {
+		t.Log(len(photos), photos)
+	}
+}

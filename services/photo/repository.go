@@ -51,3 +51,7 @@ func (r repository) Create(ctx context.Context, newp contracts.NewPhoto) (uuid.U
 func (r repository) GetByID(ctx context.Context, id uuid.UUID) (*ent.PhotosMetadata, error) {
 	return r.meta.PhotosMetadata.Get(ctx, id)
 }
+
+func (r repository) GetByOwner(ctx context.Context, oid uuid.UUID) ([]*ent.PhotosMetadata, error) {
+	return r.meta.PhotosMetadata.Query().Where(photosmetadata.OwnerID(oid)).All(ctx)
+}
