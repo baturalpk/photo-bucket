@@ -16,7 +16,7 @@ var (
 		{Name: "width", Type: field.TypeInt},
 		{Name: "height", Type: field.TypeInt},
 		{Name: "image_format", Type: field.TypeEnum, Enums: []string{"jpeg"}},
-		{Name: "url", Type: field.TypeString},
+		{Name: "relative_url", Type: field.TypeString},
 		{Name: "uploaded_at", Type: field.TypeTime},
 		{Name: "owner_id", Type: field.TypeUUID, Nullable: true},
 	}

@@ -74,9 +74,9 @@ func (pmc *PhotosMetadataCreate) SetImageFormat(pf photosmetadata.ImageFormat) *
 	return pmc
 }
 
-// SetURL sets the "url" field.
-func (pmc *PhotosMetadataCreate) SetURL(s string) *PhotosMetadataCreate {
-	pmc.mutation.SetURL(s)
+// SetRelativeURL sets the "relative_url" field.
+func (pmc *PhotosMetadataCreate) SetRelativeURL(s string) *PhotosMetadataCreate {
+	pmc.mutation.SetRelativeURL(s)
 	return pmc
 }
 
@@ -208,8 +208,8 @@ func (pmc *PhotosMetadataCreate) check() error {
 			return &ValidationError{Name: "image_format", err: fmt.Errorf(`ent: validator failed for field "PhotosMetadata.image_format": %w`, err)}
 		}
 	}
-	if _, ok := pmc.mutation.URL(); !ok {
-		return &ValidationError{Name: "url", err: errors.New(`ent: missing required field "PhotosMetadata.url"`)}
+	if _, ok := pmc.mutation.RelativeURL(); !ok {
+		return &ValidationError{Name: "relative_url", err: errors.New(`ent: missing required field "PhotosMetadata.relative_url"`)}
 	}
 	if _, ok := pmc.mutation.UploadedAt(); !ok {
 		return &ValidationError{Name: "uploaded_at", err: errors.New(`ent: missing required field "PhotosMetadata.uploaded_at"`)}
@@ -290,13 +290,13 @@ func (pmc *PhotosMetadataCreate) createSpec() (*PhotosMetadata, *sqlgraph.Create
 		})
 		_node.ImageFormat = value
 	}
-	if value, ok := pmc.mutation.URL(); ok {
+	if value, ok := pmc.mutation.RelativeURL(); ok {
 		_spec.Fields = append(_spec.Fields, &sqlgraph.FieldSpec{
 			Type:   field.TypeString,
 			Value:  value,
-			Column: photosmetadata.FieldURL,
+			Column: photosmetadata.FieldRelativeURL,
 		})
-		_node.URL = value
+		_node.RelativeURL = value
 	}
 	if value, ok := pmc.mutation.UploadedAt(); ok {
 		_spec.Fields = append(_spec.Fields, &sqlgraph.FieldSpec{

@@ -24,8 +24,8 @@ const (
 	FieldHeight = "height"
 	// FieldImageFormat holds the string denoting the image_format field in the database.
 	FieldImageFormat = "image_format"
-	// FieldURL holds the string denoting the url field in the database.
-	FieldURL = "url"
+	// FieldRelativeURL holds the string denoting the relative_url field in the database.
+	FieldRelativeURL = "relative_url"
 	// FieldUploadedAt holds the string denoting the uploaded_at field in the database.
 	FieldUploadedAt = "uploaded_at"
 	// EdgeOwner holds the string denoting the owner edge name in mutations.
@@ -50,7 +50,7 @@ var Columns = []string{
 	FieldWidth,
 	FieldHeight,
 	FieldImageFormat,
-	FieldURL,
+	FieldRelativeURL,
 	FieldUploadedAt,
 }
 

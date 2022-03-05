@@ -43,7 +43,7 @@ type PhotosMetadataMutation struct {
 	height        *int
 	addheight     *int
 	image_format  *photosmetadata.ImageFormat
-	url           *string
+	relative_url  *string
 	uploaded_at   *time.Time
 	clearedFields map[string]struct{}
 	owner         *uuid.UUID
@@ -452,40 +452,40 @@ func (m *PhotosMetadataMutation) ResetImageFormat() {
 	m.image_format = nil
 }
 
-// SetURL sets the "url" field.
-func (m *PhotosMetadataMutation) SetURL(s string) {
-	m.url = &s
+// SetRelativeURL sets the "relative_url" field.
+func (m *PhotosMetadataMutation) SetRelativeURL(s string) {
+	m.relative_url = &s
 }
 
-// URL returns the value of the "url" field in the mutation.
-func (m *PhotosMetadataMutation) URL() (r string, exists bool) {
-	v := m.url
+// RelativeURL returns the value of the "relative_url" field in the mutation.
+func (m *PhotosMetadataMutation) RelativeURL() (r string, exists bool) {
+	v := m.relative_url
 	if v == nil {
 		return
 	}
 	return *v, true
 }
 
-// OldURL returns the old "url" field's value of the PhotosMetadata entity.
+// OldRelativeURL returns the old "relative_url" field's value of the PhotosMetadata entity.
 // If the PhotosMetadata object wasn't provided to the builder, the object is fetched from the database.
 // An error is returned if the mutation operation is not UpdateOne, or the database query fails.
-func (m *PhotosMetadataMutation) OldURL(ctx context.Context) (v string, err error) {
+func (m *PhotosMetadataMutation) OldRelativeURL(ctx context.Context) (v string, err error) {
 	if !m.op.Is(OpUpdateOne) {
-		return v, errors.New("OldURL is only allowed on UpdateOne operations")
+		return v, errors.New("OldRelativeURL is only allowed on UpdateOne operations")
 	}
 	if m.id == nil || m.oldValue == nil {
-		return v, errors.New("OldURL requires an ID field in the mutation")
+		return v, errors.New("OldRelativeURL requires an ID field in the mutation")
 	}
 	oldValue, err := m.oldValue(ctx)
 	if err != nil {
-		return v, fmt.Errorf("querying old value for OldURL: %w", err)
+		return v, fmt.Errorf("querying old value for OldRelativeURL: %w", err)
 	}
-	return oldValue.URL, nil
+	return oldValue.RelativeURL, nil
 }
 
-// ResetURL resets all changes to the "url" field.
-func (m *PhotosMetadataMutation) ResetURL() {
-	m.url = nil
+// ResetRelativeURL resets all changes to the "relative_url" field.
+func (m *PhotosMetadataMutation) ResetRelativeURL() {
+	m.relative_url = nil
 }
 
 // SetUploadedAt sets the "uploaded_at" field.
@@ -588,8 +588,8 @@ func (m *PhotosMetadataMutation) Fields() []string {
 	if m.image_format != nil {
 		fields = append(fields, photosmetadata.FieldImageFormat)
 	}
-	if m.url != nil {
-		fields = append(fields, photosmetadata.FieldURL)
+	if m.relative_url != nil {
+		fields = append(fields, photosmetadata.FieldRelativeURL)
 	}
 	if m.uploaded_at != nil {
 		fields = append(fields, photosmetadata.FieldUploadedAt)
@@ -614,8 +614,8 @@ func (m *PhotosMetadataMutation) Field(name string) (ent.Value, bool) {
 		return m.Height()
 	case photosmetadata.FieldImageFormat:
 		return m.ImageFormat()
-	case photosmetadata.FieldURL:
-		return m.URL()
+	case photosmetadata.FieldRelativeURL:
+		return m.RelativeURL()
 	case photosmetadata.FieldUploadedAt:
 		return m.UploadedAt()
 	}
@@ -639,8 +639,8 @@ func (m *PhotosMetadataMutation) OldField(ctx context.Context, name string) (ent
 		return m.OldHeight(ctx)
 	case photosmetadata.FieldImageFormat:
 		return m.OldImageFormat(ctx)
-	case photosmetadata.FieldURL:
-		return m.OldURL(ctx)
+	case photosmetadata.FieldRelativeURL:
+		return m.OldRelativeURL(ctx)
 	case photosmetadata.FieldUploadedAt:
 		return m.OldUploadedAt(ctx)
 	}
@@ -694,12 +694,12 @@ func (m *PhotosMetadataMutation) SetField(name string, value ent.Value) error {
 		}
 		m.SetImageFormat(v)
 		return nil
-	case photosmetadata.FieldURL:
+	case photosmetadata.FieldRelativeURL:
 		v, ok := value.(string)
 		if !ok {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
-		m.SetURL(v)
+		m.SetRelativeURL(v)
 		return nil
 	case photosmetadata.FieldUploadedAt:
 		v, ok := value.(time.Time)
@@ -823,8 +823,8 @@ func (m *PhotosMetadataMutation) ResetField(name string) error {
 	case photosmetadata.FieldImageFormat:
 		m.ResetImageFormat()
 		return nil
-	case photosmetadata.FieldURL:
-		m.ResetURL()
+	case photosmetadata.FieldRelativeURL:
+		m.ResetRelativeURL()
 		return nil
 	case photosmetadata.FieldUploadedAt:
 		m.ResetUploadedAt()

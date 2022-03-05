@@ -31,8 +31,8 @@ type PhotosMetadata struct {
 	Height int `json:"height,omitempty"`
 	// ImageFormat holds the value of the "image_format" field.
 	ImageFormat photosmetadata.ImageFormat `json:"image_format,omitempty"`
-	// URL holds the value of the "url" field.
-	URL string `json:"url,omitempty"`
+	// RelativeURL holds the value of the "relative_url" field.
+	RelativeURL string `json:"relative_url,omitempty"`
 	// UploadedAt holds the value of the "uploaded_at" field.
 	UploadedAt time.Time `json:"uploaded_at,omitempty"`
 	// Edges holds the relations/edges for other nodes in the graph.
@@ -72,7 +72,7 @@ func (*PhotosMetadata) scanValues(columns []string) ([]interface{}, error) {
 			values[i] = new([]byte)
 		case photosmetadata.FieldWidth, photosmetadata.FieldHeight:
 			values[i] = new(sql.NullInt64)
-		case photosmetadata.FieldDescription, photosmetadata.FieldImageFormat, photosmetadata.FieldURL:
+		case photosmetadata.FieldDescription, photosmetadata.FieldImageFormat, photosmetadata.FieldRelativeURL:
 			values[i] = new(sql.NullString)
 		case photosmetadata.FieldUploadedAt:
 			values[i] = new(sql.NullTime)
@@ -137,11 +137,11 @@ func (pm *PhotosMetadata) assignValues(columns []string, values []interface{}) e
 			} else if value.Valid {
 				pm.ImageFormat = photosmetadata.ImageFormat(value.String)
 			}
-		case photosmetadata.FieldURL:
+		case photosmetadata.FieldRelativeURL:
 			if value, ok := values[i].(*sql.NullString); !ok {
-				return fmt.Errorf("unexpected type %T for field url", values[i])
+				return fmt.Errorf("unexpected type %T for field relative_url", values[i])
 			} else if value.Valid {
-				pm.URL = value.String
+				pm.RelativeURL = value.String
 			}
 		case photosmetadata.FieldUploadedAt:
 			if value, ok := values[i].(*sql.NullTime); !ok {
@@ -194,8 +194,8 @@ func (pm *PhotosMetadata) String() string {
 	builder.WriteString(fmt.Sprintf("%v", pm.Height))
 	builder.WriteString(", image_format=")
 	builder.WriteString(fmt.Sprintf("%v", pm.ImageFormat))
-	builder.WriteString(", url=")
-	builder.WriteString(pm.URL)
+	builder.WriteString(", relative_url=")
+	builder.WriteString(pm.RelativeURL)
 	builder.WriteString(", uploaded_at=")
 	builder.WriteString(pm.UploadedAt.Format(time.ANSIC))
 	builder.WriteByte(')')

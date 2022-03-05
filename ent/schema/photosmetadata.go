@@ -24,7 +24,7 @@ func (PhotosMetadata) Fields() []ent.Field {
 		field.Int("width").NonNegative().Immutable(),
 		field.Int("height").NonNegative().Immutable(),
 		field.Enum("image_format").Values("jpeg").Immutable(),
-		field.String("url").Immutable(),
+		field.String("relative_url").Immutable(),
 		field.Time("uploaded_at").Default(func() time.Time { return time.Now() }),
 	}
 }

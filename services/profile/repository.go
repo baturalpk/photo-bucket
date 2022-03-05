@@ -97,7 +97,7 @@ func (r repository) GetByUsername(ctx context.Context, username string) (p *ent.
 				photosmetadata.FieldWidth,
 				photosmetadata.FieldHeight,
 				photosmetadata.FieldImageFormat,
-				photosmetadata.FieldURL,
+				photosmetadata.FieldRelativeURL,
 				photosmetadata.FieldUploadedAt,
 			)
 			q.Order(ent.Desc(photosmetadata.FieldUploadedAt))

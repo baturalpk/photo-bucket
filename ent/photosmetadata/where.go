@@ -122,10 +122,10 @@ func Height(v int) predicate.PhotosMetadata {
 	})
 }
 
-// URL applies equality check predicate on the "url" field. It's identical to URLEQ.
-func URL(v string) predicate.PhotosMetadata {
+// RelativeURL applies equality check predicate on the "relative_url" field. It's identical to RelativeURLEQ.
+func RelativeURL(v string) predicate.PhotosMetadata {
 	return predicate.PhotosMetadata(func(s *sql.Selector) {
-		s.Where(sql.EQ(s.C(FieldURL), v))
+		s.Where(sql.EQ(s.C(FieldRelativeURL), v))
 	})
 }
 
@@ -537,22 +537,22 @@ func ImageFormatNotIn(vs ...ImageFormat) predicate.PhotosMetadata {
 	})
 }
 
-// URLEQ applies the EQ predicate on the "url" field.
-func URLEQ(v string) predicate.PhotosMetadata {
+// RelativeURLEQ applies the EQ predicate on the "relative_url" field.
+func RelativeURLEQ(v string) predicate.PhotosMetadata {
 	return predicate.PhotosMetadata(func(s *sql.Selector) {
-		s.Where(sql.EQ(s.C(FieldURL), v))
+		s.Where(sql.EQ(s.C(FieldRelativeURL), v))
 	})
 }
 
-// URLNEQ applies the NEQ predicate on the "url" field.
-func URLNEQ(v string) predicate.PhotosMetadata {
+// RelativeURLNEQ applies the NEQ predicate on the "relative_url" field.
+func RelativeURLNEQ(v string) predicate.PhotosMetadata {
 	return predicate.PhotosMetadata(func(s *sql.Selector) {
-		s.Where(sql.NEQ(s.C(FieldURL), v))
+		s.Where(sql.NEQ(s.C(FieldRelativeURL), v))
 	})
 }
 
-// URLIn applies the In predicate on the "url" field.
-func URLIn(vs ...string) predicate.PhotosMetadata {
+// RelativeURLIn applies the In predicate on the "relative_url" field.
+func RelativeURLIn(vs ...string) predicate.PhotosMetadata {
 	v := make([]interface{}, len(vs))
 	for i := range v {
 		v[i] = vs[i]
@@ -564,12 +564,12 @@ func URLIn(vs ...string) predicate.PhotosMetadata {
 			s.Where(sql.False())
 			return
 		}
-		s.Where(sql.In(s.C(FieldURL), v...))
+		s.Where(sql.In(s.C(FieldRelativeURL), v...))
 	})
 }
 
-// URLNotIn applies the NotIn predicate on the "url" field.
-func URLNotIn(vs ...string) predicate.PhotosMetadata {
+// RelativeURLNotIn applies the NotIn predicate on the "relative_url" field.
+func RelativeURLNotIn(vs ...string) predicate.PhotosMetadata {
 	v := make([]interface{}, len(vs))
 	for i := range v {
 		v[i] = vs[i]
@@ -581,70 +581,70 @@ func URLNotIn(vs ...string) predicate.PhotosMetadata {
 			s.Where(sql.False())
 			return
 		}
-		s.Where(sql.NotIn(s.C(FieldURL), v...))
+		s.Where(sql.NotIn(s.C(FieldRelativeURL), v...))
 	})
 }
 
-// URLGT applies the GT predicate on the "url" field.
-func URLGT(v string) predicate.PhotosMetadata {
+// RelativeURLGT applies the GT predicate on the "relative_url" field.
+func RelativeURLGT(v string) predicate.PhotosMetadata {
 	return predicate.PhotosMetadata(func(s *sql.Selector) {
-		s.Where(sql.GT(s.C(FieldURL), v))
+		s.Where(sql.GT(s.C(FieldRelativeURL), v))
 	})
 }
 
-// URLGTE applies the GTE predicate on the "url" field.
-func URLGTE(v string) predicate.PhotosMetadata {
+// RelativeURLGTE applies the GTE predicate on the "relative_url" field.
+func RelativeURLGTE(v string) predicate.PhotosMetadata {
 	return predicate.PhotosMetadata(func(s *sql.Selector) {
-		s.Where(sql.GTE(s.C(FieldURL), v))
+		s.Where(sql.GTE(s.C(FieldRelativeURL), v))
 	})
 }
 
-// URLLT applies the LT predicate on the "url" field.
-func URLLT(v string) predicate.PhotosMetadata {
+// RelativeURLLT applies the LT predicate on the "relative_url" field.
+func RelativeURLLT(v string) predicate.PhotosMetadata {
 	return predicate.PhotosMetadata(func(s *sql.Selector) {
-		s.Where(sql.LT(s.C(FieldURL), v))
+		s.Where(sql.LT(s.C(FieldRelativeURL), v))
 	})
 }
 
-// URLLTE applies the LTE predicate on the "url" field.
-func URLLTE(v string) predicate.PhotosMetadata {
+// RelativeURLLTE applies the LTE predicate on the "relative_url" field.
+func RelativeURLLTE(v string) predicate.PhotosMetadata {
 	return predicate.PhotosMetadata(func(s *sql.Selector) {
-		s.Where(sql.LTE(s.C(FieldURL), v))
+		s.Where(sql.LTE(s.C(FieldRelativeURL), v))
 	})
 }
 
-// URLContains applies the Contains predicate on the "url" field.
-func URLContains(v string) predicate.PhotosMetadata {
+// RelativeURLContains applies the Contains predicate on the "relative_url" field.
+func RelativeURLContains(v string) predicate.PhotosMetadata {
 	return predicate.PhotosMetadata(func(s *sql.Selector) {
-		s.Where(sql.Contains(s.C(FieldURL), v))
+		s.Where(sql.Contains(s.C(FieldRelativeURL), v))
 	})
 }
 
-// URLHasPrefix applies the HasPrefix predicate on the "url" field.
-func URLHasPrefix(v string) predicate.PhotosMetadata {
+// RelativeURLHasPrefix applies the HasPrefix predicate on the "relative_url" field.
+func RelativeURLHasPrefix(v string) predicate.PhotosMetadata {
 	return predicate.PhotosMetadata(func(s *sql.Selector) {
-		s.Where(sql.HasPrefix(s.C(FieldURL), v))
+		s.Where(sql.HasPrefix(s.C(FieldRelativeURL), v))
 	})
 }
 
-// URLHasSuffix applies the HasSuffix predicate on the "url" field.
-func URLHasSuffix(v string) predicate.PhotosMetadata {
+// RelativeURLHasSuffix applies the HasSuffix predicate on the "relative_url" field.
+func RelativeURLHasSuffix(v string) predicate.PhotosMetadata {
 	return predicate.PhotosMetadata(func(s *sql.Selector) {
-		s.Where(sql.HasSuffix(s.C(FieldURL), v))
+		s.Where(sql.HasSuffix(s.C(FieldRelativeURL), v))
 	})
 }
 
-// URLEqualFold applies the EqualFold predicate on the "url" field.
-func URLEqualFold(v string) predicate.PhotosMetadata {
+// RelativeURLEqualFold applies the EqualFold predicate on the "relative_url" field.
+func RelativeURLEqualFold(v string) predicate.PhotosMetadata {
 	return predicate.PhotosMetadata(func(s *sql.Selector) {
-		s.Where(sql.EqualFold(s.C(FieldURL), v))
+		s.Where(sql.EqualFold(s.C(FieldRelativeURL), v))
 	})
 }
 
-// URLContainsFold applies the ContainsFold predicate on the "url" field.
-func URLContainsFold(v string) predicate.PhotosMetadata {
+// RelativeURLContainsFold applies the ContainsFold predicate on the "relative_url" field.
+func RelativeURLContainsFold(v string) predicate.PhotosMetadata {
 	return predicate.PhotosMetadata(func(s *sql.Selector) {
-		s.Where(sql.ContainsFold(s.C(FieldURL), v))
+		s.Where(sql.ContainsFold(s.C(FieldRelativeURL), v))
 	})
 }
 
