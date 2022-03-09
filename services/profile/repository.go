@@ -7,8 +7,8 @@ import (
 
 	"github.com/baturalpk/photo-bucket/ent"
 	"github.com/baturalpk/photo-bucket/ent/profile"
-	"github.com/baturalpk/photo-bucket/pkg/crypto"
 	"github.com/baturalpk/photo-bucket/services/profile/contracts"
+	"github.com/baturalpk/photo-bucket/utils/crypto"
 	"github.com/golang-jwt/jwt/v4"
 )
 

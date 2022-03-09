@@ -5,9 +5,9 @@ import (
 	"testing"
 
 	"github.com/baturalpk/photo-bucket/clients/entclient"
-	"github.com/baturalpk/photo-bucket/pkg/crypto"
 	"github.com/baturalpk/photo-bucket/services/profile/contracts"
 	"github.com/baturalpk/photo-bucket/test/data"
+	"github.com/baturalpk/photo-bucket/utils/crypto"
 )
 
 func beforeTest(t *testing.T) {

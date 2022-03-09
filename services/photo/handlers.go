@@ -3,8 +3,8 @@ package photo
 import (
 	"net/http"
 
-	"github.com/baturalpk/photo-bucket/pkg/validator"
 	"github.com/baturalpk/photo-bucket/services/photo/contracts"
+	"github.com/baturalpk/photo-bucket/utils/validator"
 	"github.com/gofiber/fiber/v2"
 	"github.com/google/uuid"
 )
@@ -19,7 +19,7 @@ func NewHandlers(photoRepo *repository) *handlers {
 	}
 }
 
-func (h handlers) PostNewPhoto(c *fiber.Ctx) error {
+func (h handlers) PostNewPhoto(c *fiber.Ctx) error { // TODO: ! Handle image data extraction explicitly, set format, etc...
 	in := new(contracts.NewPhoto)
 	if err := c.BodyParser(in); err != nil {
 		return err

@@ -2,8 +2,8 @@ package profile
 
 import (
 	"github.com/baturalpk/photo-bucket/ent"
-	"github.com/baturalpk/photo-bucket/pkg/validator"
 	"github.com/baturalpk/photo-bucket/services/profile/contracts"
+	"github.com/baturalpk/photo-bucket/utils/validator"
 	"github.com/gofiber/fiber/v2"
 )
 
