@@ -34,12 +34,12 @@ func (h handlers) signUp(c *fiber.Ctx, form interface{}) error {
 
 func (h handlers) SignUpViaEmail(c *fiber.Ctx) error {
 	form := new(contracts.SignUpFormWithEmail)
-	return h.signUp(c, form)
+	return h.signUp(c, *form)
 }
 
 func (h handlers) SignUpViaPhone(c *fiber.Ctx) error {
 	form := new(contracts.SignUpFormWithPhone)
-	return h.signUp(c, form)
+	return h.signUp(c, *form)
 }
 
 func (h handlers) SignIn(c *fiber.Ctx) error {
