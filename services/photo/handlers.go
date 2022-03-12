@@ -26,15 +26,7 @@ func (h handlers) PostNewPhoto(c *fiber.Ctx) error {
 	if err := c.BodyParser(in); err != nil {
 		return err
 	}
-	ownerStr := c.FormValue("owner_id")
-	if ownerStr == "" {
-		return c.Status(http.StatusBadRequest).SendString("no 'owner_id' indicated")
-	}
-	owner, err := uuid.Parse(ownerStr)
-	if err != nil {
-		return c.Status(http.StatusBadRequest).SendString("'owner_id' must be uuidV4 type")
-	}
-	in.OwnerID = owner
+	in.OwnerID = c.UserContext().Value("id").(uuid.UUID)
 	photo, err := c.FormFile("photo")
 	if err != nil {
 		return err
@@ -73,11 +65,7 @@ func (h handlers) GetOneByID(c *fiber.Ctx) error {
 }
 
 func (h handlers) GetAllByOwnerID(c *fiber.Ctx) error {
-	id := c.Params("id")
-	oid, err := uuid.Parse(id)
-	if err != nil {
-		return c.SendStatus(http.StatusFound)
-	}
+	oid := c.UserContext().Value("id").(uuid.UUID)
 	photos, err := h.repo.GetByOwner(c.UserContext(), oid)
 	if err != nil {
 		return err
