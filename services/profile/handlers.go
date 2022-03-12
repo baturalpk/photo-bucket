@@ -50,7 +50,7 @@ func (h handlers) SignIn(c *fiber.Ctx) error {
 	if err := validator.GetValidatorInstance().Struct(f); err != nil {
 		return err
 	}
-	profile, token, err := h.repo.SignIn(c.UserContext(), f)
+	profile, token, err := h.repo.SignIn(c.UserContext(), *f)
 	if err != nil {
 		return err
 	}

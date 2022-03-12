@@ -79,7 +79,7 @@ func (r repository) SignIn(ctx context.Context, form interface{}) (*ent.Profile,
 	}
 
 	token, err := crypto.SignNewJWTWithClaims(claims)
-	return nil, token, err
+	return p, token, err
 }
 
 func (r repository) GetByUsername(ctx context.Context, username string) (*ent.Profile, error) {
