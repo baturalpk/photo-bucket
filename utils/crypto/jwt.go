@@ -3,6 +3,7 @@ package crypto
 import (
 	"crypto/ecdsa"
 	"errors"
+	"log"
 
 	"github.com/baturalpk/photo-bucket/config"
 	"github.com/golang-jwt/jwt/v4"
@@ -11,6 +12,10 @@ import (
 var ecdsaPrivateKey *ecdsa.PrivateKey
 var ecdsaPublicKey *ecdsa.PublicKey
 var errInit error
+
+func init() {
+	LoadES256KeysIntoMemory()
+}
 
 func LoadES256KeysIntoMemory() {
 	privateKey := config.Get().ES256.PrivateKey
@@ -25,6 +30,7 @@ func LoadES256KeysIntoMemory() {
 	if errInit != nil {
 		panic(errInit.Error())
 	}
+	log.Println("ES256 keys are loaded into the memory")
 }
 
 func SignNewJWTWithClaims(claims jwt.Claims) (string, error) {

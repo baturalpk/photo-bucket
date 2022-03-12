@@ -3,6 +3,7 @@ package entclient
 import (
 	"context"
 	"database/sql"
+	"log"
 
 	"entgo.io/ent/dialect"
 	entsql "entgo.io/ent/dialect/sql"
@@ -19,6 +20,7 @@ func InitConnection() error {
 		return err
 	}
 
+	log.Println("trying to create an entclient connection using postgres driver...")
 	db, err := sql.Open("pgx", connstring)
 	if err != nil {
 		return err
@@ -30,6 +32,7 @@ func InitConnection() error {
 	if err := client.Schema.Create(context.Background()); err != nil {
 		return err
 	}
+	log.Println("successfully established entclient connection(s)")
 	return nil
 }
 

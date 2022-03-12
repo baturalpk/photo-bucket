@@ -10,6 +10,7 @@ import (
 )
 
 var c Config
+var emptyConf Config
 var testDir string
 
 type Config struct {
@@ -65,6 +66,9 @@ type es256 struct {
 }
 
 func LoadConfigurations() {
+	if c != emptyConf {
+		return
+	}
 	_, file, _, _ := runtime.Caller(0)
 	projectRoot := filepath.Dir(path.Join(path.Dir(file)))
 	configDir := filepath.Join(projectRoot, "config")
@@ -79,10 +83,10 @@ func LoadConfigurations() {
 	if err := viper.Unmarshal(&c); err != nil {
 		log.Fatalln("Failed to unmarshal configurations, ", err)
 	}
+	log.Println("Configurations are successfully prepared")
 }
 
 func Get() Config {
-	var emptyConf Config
 	if c == emptyConf {
 		LoadConfigurations()
 	}
