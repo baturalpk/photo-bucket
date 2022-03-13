@@ -1,0 +1,26 @@
+version: '3.7'
+services:
+  server:
+    container_name: photo-bucket-server
+    image: photo-bucket:latest
+    environment:
+      env: "prod"
+    restart: on-failure
+    networks:
+      - default
+    ports:
+      - "81:81"
+    depends_on:
+      - pgsql
+  pgsql:
+    container_name: photo-bucket-postgres
+    image: postgres:14.2
+    env_file:
+      - ../config/db.env
+    restart: always
+    ports:
+      - "5432:5432"
+    volumes:
+      - data:/var/lib/postgresql/data
+volumes:
+  data:
