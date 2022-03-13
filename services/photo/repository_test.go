@@ -18,6 +18,7 @@ import (
 var tempID uuid.UUID
 
 func beforeTest(t *testing.T) {
+	os.Setenv("env", "test")
 	if err1, err2 := entclient.InitConnection(), s3client.InitConnection(); err1 != nil || err2 != nil {
 		t.Error(err1, err2)
 		t.FailNow()

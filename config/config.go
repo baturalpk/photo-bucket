@@ -2,6 +2,7 @@ package config
 
 import (
 	"log"
+	"os"
 	"path"
 	"path/filepath"
 	"runtime"
@@ -75,6 +76,9 @@ func LoadConfigurations() {
 	}
 	if err := viper.Unmarshal(&c); err != nil {
 		log.Fatalln("Failed to unmarshal configurations, ", err)
+	}
+	if env := os.Getenv("env"); env != "" {
+		c.Env = env
 	}
 	log.Println("Configurations are successfully prepared")
 }

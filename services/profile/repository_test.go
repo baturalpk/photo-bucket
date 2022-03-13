@@ -2,6 +2,7 @@ package profile
 
 import (
 	"context"
+	"os"
 	"testing"
 
 	"github.com/baturalpk/photo-bucket/clients/entclient"
@@ -11,6 +12,7 @@ import (
 )
 
 func beforeTest(t *testing.T) {
+	os.Setenv("env", "test")
 	crypto.LoadES256KeysIntoMemory()
 	if err := entclient.InitConnection(); err != nil {
 		t.Error(err)
