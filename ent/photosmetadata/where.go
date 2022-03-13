@@ -122,6 +122,13 @@ func Height(v int) predicate.PhotosMetadata {
 	})
 }
 
+// OriginServer applies equality check predicate on the "origin_server" field. It's identical to OriginServerEQ.
+func OriginServer(v string) predicate.PhotosMetadata {
+	return predicate.PhotosMetadata(func(s *sql.Selector) {
+		s.Where(sql.EQ(s.C(FieldOriginServer), v))
+	})
+}
+
 // RelativeURL applies equality check predicate on the "relative_url" field. It's identical to RelativeURLEQ.
 func RelativeURL(v string) predicate.PhotosMetadata {
 	return predicate.PhotosMetadata(func(s *sql.Selector) {
@@ -534,6 +541,117 @@ func ImageFormatNotIn(vs ...ImageFormat) predicate.PhotosMetadata {
 			return
 		}
 		s.Where(sql.NotIn(s.C(FieldImageFormat), v...))
+	})
+}
+
+// OriginServerEQ applies the EQ predicate on the "origin_server" field.
+func OriginServerEQ(v string) predicate.PhotosMetadata {
+	return predicate.PhotosMetadata(func(s *sql.Selector) {
+		s.Where(sql.EQ(s.C(FieldOriginServer), v))
+	})
+}
+
+// OriginServerNEQ applies the NEQ predicate on the "origin_server" field.
+func OriginServerNEQ(v string) predicate.PhotosMetadata {
+	return predicate.PhotosMetadata(func(s *sql.Selector) {
+		s.Where(sql.NEQ(s.C(FieldOriginServer), v))
+	})
+}
+
+// OriginServerIn applies the In predicate on the "origin_server" field.
+func OriginServerIn(vs ...string) predicate.PhotosMetadata {
+	v := make([]interface{}, len(vs))
+	for i := range v {
+		v[i] = vs[i]
+	}
+	return predicate.PhotosMetadata(func(s *sql.Selector) {
+		// if not arguments were provided, append the FALSE constants,
+		// since we can't apply "IN ()". This will make this predicate falsy.
+		if len(v) == 0 {
+			s.Where(sql.False())
+			return
+		}
+		s.Where(sql.In(s.C(FieldOriginServer), v...))
+	})
+}
+
+// OriginServerNotIn applies the NotIn predicate on the "origin_server" field.
+func OriginServerNotIn(vs ...string) predicate.PhotosMetadata {
+	v := make([]interface{}, len(vs))
+	for i := range v {
+		v[i] = vs[i]
+	}
+	return predicate.PhotosMetadata(func(s *sql.Selector) {
+		// if not arguments were provided, append the FALSE constants,
+		// since we can't apply "IN ()". This will make this predicate falsy.
+		if len(v) == 0 {
+			s.Where(sql.False())
+			return
+		}
+		s.Where(sql.NotIn(s.C(FieldOriginServer), v...))
+	})
+}
+
+// OriginServerGT applies the GT predicate on the "origin_server" field.
+func OriginServerGT(v string) predicate.PhotosMetadata {
+	return predicate.PhotosMetadata(func(s *sql.Selector) {
+		s.Where(sql.GT(s.C(FieldOriginServer), v))
+	})
+}
+
+// OriginServerGTE applies the GTE predicate on the "origin_server" field.
+func OriginServerGTE(v string) predicate.PhotosMetadata {
+	return predicate.PhotosMetadata(func(s *sql.Selector) {
+		s.Where(sql.GTE(s.C(FieldOriginServer), v))
+	})
+}
+
+// OriginServerLT applies the LT predicate on the "origin_server" field.
+func OriginServerLT(v string) predicate.PhotosMetadata {
+	return predicate.PhotosMetadata(func(s *sql.Selector) {
+		s.Where(sql.LT(s.C(FieldOriginServer), v))
+	})
+}
+
+// OriginServerLTE applies the LTE predicate on the "origin_server" field.
+func OriginServerLTE(v string) predicate.PhotosMetadata {
+	return predicate.PhotosMetadata(func(s *sql.Selector) {
+		s.Where(sql.LTE(s.C(FieldOriginServer), v))
+	})
+}
+
+// OriginServerContains applies the Contains predicate on the "origin_server" field.
+func OriginServerContains(v string) predicate.PhotosMetadata {
+	return predicate.PhotosMetadata(func(s *sql.Selector) {
+		s.Where(sql.Contains(s.C(FieldOriginServer), v))
+	})
+}
+
+// OriginServerHasPrefix applies the HasPrefix predicate on the "origin_server" field.
+func OriginServerHasPrefix(v string) predicate.PhotosMetadata {
+	return predicate.PhotosMetadata(func(s *sql.Selector) {
+		s.Where(sql.HasPrefix(s.C(FieldOriginServer), v))
+	})
+}
+
+// OriginServerHasSuffix applies the HasSuffix predicate on the "origin_server" field.
+func OriginServerHasSuffix(v string) predicate.PhotosMetadata {
+	return predicate.PhotosMetadata(func(s *sql.Selector) {
+		s.Where(sql.HasSuffix(s.C(FieldOriginServer), v))
+	})
+}
+
+// OriginServerEqualFold applies the EqualFold predicate on the "origin_server" field.
+func OriginServerEqualFold(v string) predicate.PhotosMetadata {
+	return predicate.PhotosMetadata(func(s *sql.Selector) {
+		s.Where(sql.EqualFold(s.C(FieldOriginServer), v))
+	})
+}
+
+// OriginServerContainsFold applies the ContainsFold predicate on the "origin_server" field.
+func OriginServerContainsFold(v string) predicate.PhotosMetadata {
+	return predicate.PhotosMetadata(func(s *sql.Selector) {
+		s.Where(sql.ContainsFold(s.C(FieldOriginServer), v))
 	})
 }
 

@@ -24,6 +24,8 @@ const (
 	FieldHeight = "height"
 	// FieldImageFormat holds the string denoting the image_format field in the database.
 	FieldImageFormat = "image_format"
+	// FieldOriginServer holds the string denoting the origin_server field in the database.
+	FieldOriginServer = "origin_server"
 	// FieldRelativeURL holds the string denoting the relative_url field in the database.
 	FieldRelativeURL = "relative_url"
 	// FieldUploadedAt holds the string denoting the uploaded_at field in the database.
@@ -50,6 +52,7 @@ var Columns = []string{
 	FieldWidth,
 	FieldHeight,
 	FieldImageFormat,
+	FieldOriginServer,
 	FieldRelativeURL,
 	FieldUploadedAt,
 }

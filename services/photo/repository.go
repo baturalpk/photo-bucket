@@ -27,7 +27,7 @@ func (r repository) Create(ctx context.Context, newp contracts.NewPhoto) (uuid.U
 	pid := uuid.New()
 	url := fmt.Sprintf("/%s/%s.%s", newp.OwnerID, pid.String(), newp.Format)
 
-	if err := r.s3.UploadPhoto(url, newp.Data); err != nil { // TODO: Make async. using goroutines + buf. channels
+	if err := r.s3.UploadPhoto(url, newp.Data); err != nil {
 		return pid, err
 	}
 
@@ -40,6 +40,7 @@ func (r repository) Create(ctx context.Context, newp contracts.NewPhoto) (uuid.U
 		SetWidth(newp.Data.Bounds().Dx()).
 		SetHeight(newp.Data.Bounds().Dy()).
 		SetImageFormat(photosmetadata.ImageFormat(newp.Format)).
+		SetOriginServer(r.s3.OriginServer()).
 		SetRelativeURL(url)
 
 	if _, err := metad.Save(ctx); err != nil {

@@ -26,7 +26,7 @@ func init() {
 	// photosmetadata.HeightValidator is a validator for the "height" field. It is called by the builders before save.
 	photosmetadata.HeightValidator = photosmetadataDescHeight.Validators[0].(func(int) error)
 	// photosmetadataDescUploadedAt is the schema descriptor for uploaded_at field.
-	photosmetadataDescUploadedAt := photosmetadataFields[8].Descriptor()
+	photosmetadataDescUploadedAt := photosmetadataFields[9].Descriptor()
 	// photosmetadata.DefaultUploadedAt holds the default value on creation for the uploaded_at field.
 	photosmetadata.DefaultUploadedAt = photosmetadataDescUploadedAt.Default.(func() time.Time)
 	profileFields := schema.Profile{}.Fields()

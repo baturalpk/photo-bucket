@@ -74,6 +74,12 @@ func (pmc *PhotosMetadataCreate) SetImageFormat(pf photosmetadata.ImageFormat) *
 	return pmc
 }
 
+// SetOriginServer sets the "origin_server" field.
+func (pmc *PhotosMetadataCreate) SetOriginServer(s string) *PhotosMetadataCreate {
+	pmc.mutation.SetOriginServer(s)
+	return pmc
+}
+
 // SetRelativeURL sets the "relative_url" field.
 func (pmc *PhotosMetadataCreate) SetRelativeURL(s string) *PhotosMetadataCreate {
 	pmc.mutation.SetRelativeURL(s)
@@ -208,6 +214,9 @@ func (pmc *PhotosMetadataCreate) check() error {
 			return &ValidationError{Name: "image_format", err: fmt.Errorf(`ent: validator failed for field "PhotosMetadata.image_format": %w`, err)}
 		}
 	}
+	if _, ok := pmc.mutation.OriginServer(); !ok {
+		return &ValidationError{Name: "origin_server", err: errors.New(`ent: missing required field "PhotosMetadata.origin_server"`)}
+	}
 	if _, ok := pmc.mutation.RelativeURL(); !ok {
 		return &ValidationError{Name: "relative_url", err: errors.New(`ent: missing required field "PhotosMetadata.relative_url"`)}
 	}
@@ -289,6 +298,14 @@ func (pmc *PhotosMetadataCreate) createSpec() (*PhotosMetadata, *sqlgraph.Create
 			Column: photosmetadata.FieldImageFormat,
 		})
 		_node.ImageFormat = value
+	}
+	if value, ok := pmc.mutation.OriginServer(); ok {
+		_spec.Fields = append(_spec.Fields, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Value:  value,
+			Column: photosmetadata.FieldOriginServer,
+		})
+		_node.OriginServer = value
 	}
 	if value, ok := pmc.mutation.RelativeURL(); ok {
 		_spec.Fields = append(_spec.Fields, &sqlgraph.FieldSpec{

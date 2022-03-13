@@ -16,6 +16,7 @@ var (
 		{Name: "width", Type: field.TypeInt},
 		{Name: "height", Type: field.TypeInt},
 		{Name: "image_format", Type: field.TypeEnum, Enums: []string{"jpeg"}},
+		{Name: "origin_server", Type: field.TypeString},
 		{Name: "relative_url", Type: field.TypeString},
 		{Name: "uploaded_at", Type: field.TypeTime},
 		{Name: "owner_id", Type: field.TypeUUID, Nullable: true},
@@ -28,7 +29,7 @@ var (
 		ForeignKeys: []*schema.ForeignKey{
 			{
 				Symbol:     "photos_metadata_profiles_photos",
-				Columns:    []*schema.Column{PhotosMetadataColumns[8]},
+				Columns:    []*schema.Column{PhotosMetadataColumns[9]},
 				RefColumns: []*schema.Column{ProfilesColumns[0]},
 				OnDelete:   schema.SetNull,
 			},

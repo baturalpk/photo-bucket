@@ -43,6 +43,7 @@ type PhotosMetadataMutation struct {
 	height        *int
 	addheight     *int
 	image_format  *photosmetadata.ImageFormat
+	origin_server *string
 	relative_url  *string
 	uploaded_at   *time.Time
 	clearedFields map[string]struct{}
@@ -452,6 +453,42 @@ func (m *PhotosMetadataMutation) ResetImageFormat() {
 	m.image_format = nil
 }
 
+// SetOriginServer sets the "origin_server" field.
+func (m *PhotosMetadataMutation) SetOriginServer(s string) {
+	m.origin_server = &s
+}
+
+// OriginServer returns the value of the "origin_server" field in the mutation.
+func (m *PhotosMetadataMutation) OriginServer() (r string, exists bool) {
+	v := m.origin_server
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldOriginServer returns the old "origin_server" field's value of the PhotosMetadata entity.
+// If the PhotosMetadata object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *PhotosMetadataMutation) OldOriginServer(ctx context.Context) (v string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldOriginServer is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldOriginServer requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldOriginServer: %w", err)
+	}
+	return oldValue.OriginServer, nil
+}
+
+// ResetOriginServer resets all changes to the "origin_server" field.
+func (m *PhotosMetadataMutation) ResetOriginServer() {
+	m.origin_server = nil
+}
+
 // SetRelativeURL sets the "relative_url" field.
 func (m *PhotosMetadataMutation) SetRelativeURL(s string) {
 	m.relative_url = &s
@@ -569,7 +606,7 @@ func (m *PhotosMetadataMutation) Type() string {
 // order to get all numeric fields that were incremented/decremented, call
 // AddedFields().
 func (m *PhotosMetadataMutation) Fields() []string {
-	fields := make([]string, 0, 8)
+	fields := make([]string, 0, 9)
 	if m.owner != nil {
 		fields = append(fields, photosmetadata.FieldOwnerID)
 	}
@@ -587,6 +624,9 @@ func (m *PhotosMetadataMutation) Fields() []string {
 	}
 	if m.image_format != nil {
 		fields = append(fields, photosmetadata.FieldImageFormat)
+	}
+	if m.origin_server != nil {
+		fields = append(fields, photosmetadata.FieldOriginServer)
 	}
 	if m.relative_url != nil {
 		fields = append(fields, photosmetadata.FieldRelativeURL)
@@ -614,6 +654,8 @@ func (m *PhotosMetadataMutation) Field(name string) (ent.Value, bool) {
 		return m.Height()
 	case photosmetadata.FieldImageFormat:
 		return m.ImageFormat()
+	case photosmetadata.FieldOriginServer:
+		return m.OriginServer()
 	case photosmetadata.FieldRelativeURL:
 		return m.RelativeURL()
 	case photosmetadata.FieldUploadedAt:
@@ -639,6 +681,8 @@ func (m *PhotosMetadataMutation) OldField(ctx context.Context, name string) (ent
 		return m.OldHeight(ctx)
 	case photosmetadata.FieldImageFormat:
 		return m.OldImageFormat(ctx)
+	case photosmetadata.FieldOriginServer:
+		return m.OldOriginServer(ctx)
 	case photosmetadata.FieldRelativeURL:
 		return m.OldRelativeURL(ctx)
 	case photosmetadata.FieldUploadedAt:
@@ -693,6 +737,13 @@ func (m *PhotosMetadataMutation) SetField(name string, value ent.Value) error {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
 		m.SetImageFormat(v)
+		return nil
+	case photosmetadata.FieldOriginServer:
+		v, ok := value.(string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetOriginServer(v)
 		return nil
 	case photosmetadata.FieldRelativeURL:
 		v, ok := value.(string)
@@ -822,6 +873,9 @@ func (m *PhotosMetadataMutation) ResetField(name string) error {
 		return nil
 	case photosmetadata.FieldImageFormat:
 		m.ResetImageFormat()
+		return nil
+	case photosmetadata.FieldOriginServer:
+		m.ResetOriginServer()
 		return nil
 	case photosmetadata.FieldRelativeURL:
 		m.ResetRelativeURL()

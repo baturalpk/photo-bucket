@@ -3,6 +3,7 @@ package s3client
 import (
 	"bytes"
 	"errors"
+	"fmt"
 	"image"
 	"image/jpeg"
 	"io"
@@ -24,6 +25,7 @@ const (
 var (
 	s3Session    *session.Session
 	photosBucket string
+	originServer string
 )
 
 type S3 struct{}
@@ -85,6 +87,7 @@ func InitConnection() error {
 		return errors.New("GO_ENV is not defined properly")
 	}
 
+	originServer = fmt.Sprintf("%s/%s", config.Get().S3.Endpoint, photosBucket)
 	s3Config := &aws.Config{
 		Credentials:      credentials.NewStaticCredentials(config.Get().S3.Credentials.Id, config.Get().S3.Credentials.Secret, ""),
 		Endpoint:         aws.String(config.Get().S3.Endpoint),
@@ -101,4 +104,8 @@ func InitConnection() error {
 
 	log.Println("successfully created a new S3 session")
 	return nil
+}
+
+func (S3) OriginServer() string {
+	return originServer
 }

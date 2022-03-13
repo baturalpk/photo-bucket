@@ -24,9 +24,7 @@ func (PhotosMetadata) Fields() []ent.Field {
 		field.Int("width").NonNegative().Immutable(),
 		field.Int("height").NonNegative().Immutable(),
 		field.Enum("image_format").Values("jpeg").Immutable(),
-		// TODO: Add field 'origin_server' to indicate where relative_url is exactly pointing.
-		// 		 e.g., "s3.amazonaws.com", or "cdn.example.com/images", ...
-		//		 ! Load from repository configurations & Set() while you are creating a new photo.
+		field.String("origin_server").Immutable(),
 		field.String("relative_url").Immutable(),
 		field.Time("uploaded_at").Default(func() time.Time { return time.Now() }),
 	}
