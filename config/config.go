@@ -16,7 +16,6 @@ var testDir string
 type Config struct {
 	Env         string
 	ES256       es256
-	MongoURI    mongoConnectionStrings
 	PostgresURI postgresURI
 	S3          s3
 	Server      server
@@ -52,12 +51,6 @@ type photos struct {
 type s3Credentials struct {
 	Id     string
 	Secret string
-}
-
-type mongoConnectionStrings struct {
-	Prod string
-	Dev  string
-	Test string
 }
 
 type es256 struct {
