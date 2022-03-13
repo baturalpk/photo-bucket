@@ -22,6 +22,8 @@ vendor/
 # Ignore secrets config files except the template.
 *secrets*
 !config/secrets.template.yaml
+*.env*
+!config/*.template.env*
 
 # Ignore dotenv config files except the template.
 .env*
