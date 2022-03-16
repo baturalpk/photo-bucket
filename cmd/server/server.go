@@ -20,7 +20,7 @@ func main() {
 		log.Fatalf("ent: init: error: %s\n", err)
 	}
 
-	if err := api.Serve(config.Get().Server.Port); err != nil {
+	if err := api.Serve(81); err != nil {
 		entclient.CloseConnection()
 		log.Fatalln(err)
 		return

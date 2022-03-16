@@ -19,17 +19,12 @@ type Config struct {
 	ES256       es256
 	PostgresURI postgresURI
 	S3          s3
-	Server      server
 }
 
 type postgresURI struct {
 	Prod string
 	Dev  string
 	Test string
-}
-
-type server struct {
-	Port int
 }
 
 type s3 struct {
