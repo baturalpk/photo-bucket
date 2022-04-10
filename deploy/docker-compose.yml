@@ -9,7 +9,7 @@ services:
     networks:
       - default
     ports:
-      - "81:81"
+      - "8080:80"
     depends_on:
       - pgsql
   pgsql:

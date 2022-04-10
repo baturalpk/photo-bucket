@@ -9,5 +9,5 @@ RUN go mod download
 COPY . ./
 RUN [ "go", "build", "-o", "$EXEC_NAME", "./cmd/server" ]
 
-EXPOSE 81
+EXPOSE 80
 CMD [ "./$EXEC_NAME" ]
