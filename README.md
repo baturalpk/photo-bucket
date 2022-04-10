@@ -2,7 +2,47 @@
 A demonstrative HTTP API, which follows REST standards, is basically a kind of photo upload service.
 Configure, run, and create a profile to start uploading your favorite photos. <br><br>
 Follow the guide to complete the installation. Upon the successful completion of setup & deployment phases, the app will be
-accessible from http://localhost:81/
+accessible from http://localhost:8080
+
+## Endpoints
+Most **request bodies** can be delivered either as `JSON payload` or in `x-www-form-urlencoded` format until stated otherwise.
+
+### Profiles Endpoints:
+#### - POST /profiles/signup/email : <br>
+  *Request body (all fields are **required**) :*
+```json
+{
+  "email":    "...@...",
+  "username": "...",
+  "password": "***" 
+}
+```
+#### - POST /profiles/signin : <br>
+  *Request body ('password' and " 'username' **OR** 'email' " are required) :*
+```json
+{
+  "email":    "...@...",
+  "username": "...",
+  "password": "***" 
+}
+```
+#### - GET /profiles/{username} : <br>
+Retrieves a specific profile by username.
+### Photos Endpoints:
+#### - POST /photos/ : <br>
+**⚠️Expects multi-part form data** <br>
+*Request body ('owner_id' and 'photo' are **required**) :*
+```text
+{
+  "photo":       < multi-part image file > // jpeg (jpg) is currently the only supported format ( < 30 MB )
+  "tags":        < Array[string] >
+  "description": < string >
+}
+```
+#### - GET /photos/owner/{id} : <br>
+Retrieves a photo collection by its owner's ID.
+#### - GET /photos/{id} : <br>
+Retrieves a specific photo's details by ID.
 
 ## Prerequisites
 1. Access to an Amazon S3 or S3 compatible (e.g., Backblaze B2) storage service
@@ -81,7 +121,7 @@ POSTGRES_DB=photo-bucket
 1. Ensure that the Docker engine is operating healthy.
 2. Open a shell at the project's root directory (`photo-bucket`).
 3. Run the target `deployment` from `Makefile` with: ```make deployment```
-4. After a short time, the application will be accessible from: ```http://localhost:81```
+4. After a short time, the application will be accessible from: ```http://localhost:8080```
 
 ### Building Binary Executables (Optional)
 Optionally you can create binary executables for various OS platforms:
