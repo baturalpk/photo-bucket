@@ -1,15 +1,15 @@
 # Getting Started
 A demonstrative HTTP API, which follows REST standards, is basically a kind of photo upload service.
 Configure, run, and create a profile to start uploading your favorite photos. <br><br>
-Follow the guide to complete the installation. Upon the successful completion of setup & deployment phases, the app will be
-accessible from http://localhost:8080
+Follow the guide to complete the installation. Upon the successful completion of [Setup](#setup) & [Deployment](#deployment) phases, the app will be
+accessible from http://localhost:8080. See [Endpoints](#endpoints) section to learn more about its usage.
 
 ## Endpoints
 Most **request bodies** can be delivered either as `JSON payload` or in `x-www-form-urlencoded` format until stated otherwise.
 
 ### Profiles Endpoints:
 #### - POST /profiles/signup/email : <br>
-  *Request body (all fields are **required**) :*
+*Request body (all fields are **required**) :*
 ```json
 {
   "email":    "...@...",
@@ -18,7 +18,7 @@ Most **request bodies** can be delivered either as `JSON payload` or in `x-www-f
 }
 ```
 #### - POST /profiles/signin : <br>
-  *Request body ('password' and " 'username' **OR** 'email' " are required) :*
+*Request body ('password' and " 'username' **OR** 'email' " are required) :*
 ```json
 {
   "email":    "...@...",
@@ -31,7 +31,7 @@ Retrieves a specific profile by username.
 ### Photos Endpoints:
 #### - POST /photos/ : <br>
 **⚠️Expects multi-part form data** <br>
-*Request body ('owner_id' and 'photo' are **required**) :*
+*Request body ('photo' is **required**) :*
 ```text
 {
   "photo":       < multi-part image file > // jpeg (jpg) is currently the only supported format ( < 30 MB )
@@ -58,7 +58,7 @@ Retrieves a specific photo's details by ID.
     ```cd photo-bucket```
 3. Create a file named `secrets.yaml` with the same content of `config/secrets.template.yaml` under `config` directory:<br>
     ```cp config/secrets.template.yaml config/secrets.yaml```
-4. (If prerequisite 5.'s not ensured) Create a file named `db.env` with the same content of `config/db.template.env` under `config` directory:<br>
+4. (If **prerequisite 5** is not ensured) Create a file named `db.env` with the same content of `config/db.template.env` under `config` directory:<br>
     ```cp config/db.template.env config/db.env```
 5. Edit the newly created files `config/secrets.yaml` and `config/db.env` using the specifications given under [Configurations](#configurations) section.
 
